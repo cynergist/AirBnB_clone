@@ -13,29 +13,25 @@ class BaseModel():
         Creates instance of BaseModel
         Arg1: variable id is initialized at None
         '''
-        self.id =  uuid.uuid4()
+        self.id = str(uuid.uuid4())
         ''' id is an attribute of the class
             created_at is datetime, assigns when instance created
             updated_at is datetime as above and updates on object change
         '''
-        self.created_at = datetime.utcnow()
-        self.updated_at = datetime.now()
+        self.created_at = datetime.now()
+        self.updated_at = self.created_at
         ''' uuid4 function generates random unique user id '''
-
-        self.__class__ = self.dict
 
     def __str__(self):
         ''' String representation of class name, id, and __dict__ '''
-        return ('[{}] ({}) {}'.format(self, self.id, self.dict))
+        return ('[{}] ({}) {}'
+                .format(self.__class__.__name__, self.id, self.__dict__))
 
     def save(self):
         ''' Instance that updates updated_at with current datetime '''
-        self.updated_at = datetime.now(tz=None)
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         ''' Returns dictionary representation of keys/values '''
-        self.__dict__ = self.dict
-
-        return {'my_number': my_model.my_number, 'name': my_model.name,
-        'updated_at': self.updated_at, 'id': self.id,
-        'created_at': self.created_at}
+        self.__dict__['_class_'] = 'self.__dict__'
+        return self.__dict__
