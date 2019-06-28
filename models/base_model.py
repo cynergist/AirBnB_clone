@@ -21,7 +21,7 @@ class BaseModel():
         self.created_at = datetime.utcnow()
         self.updated_at = datetime.now()
         ''' uuid4 function generates random unique user id '''
-        self.__dict__ = self.dict
+
         self.__class__ = self.dict
 
     def __str__(self):
@@ -34,7 +34,8 @@ class BaseModel():
 
     def to_dict(self):
         ''' Returns dictionary representation of keys/values '''
-        '''
-        return {'my_number': , 'name': , 'updated_at': self.updated_at,
-                'id': self.id, 'created_at': self.created_at}
-        '''
+        self.__dict__ = self.dict
+
+        return {'my_number': my_model.my_number, 'name': my_model.name,
+        'updated_at': self.updated_at, 'id': self.id,
+        'created_at': self.created_at}
