@@ -8,19 +8,28 @@ from datetime import datetime
 
 class BaseModel():
     ''' Parent class/file for future classes in separate files '''
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''
         Creates instance of BaseModel
-        Arg1: variable id is initialized at None
+        Arg1: None
+        Arg2: Current key/values in dictionary
         '''
         self.id = str(uuid.uuid4())
         ''' id is an attribute of the class
-            created_at is datetime, assigns when instance created
-            updated_at is datetime as above and updates on object change
+            uuid4 function generates random unique user id
         '''
         self.created_at = datetime.now()
         self.updated_at = self.created_at
-        ''' uuid4 function generates random unique user id '''
+        ''' created_at is datetime, assigns when instance created
+            updated_at is datetime as above and updates on object change
+        '''
+
+        for key, value in kwargs.items():
+            if value is not None:
+                continue
+            else:
+                self.id = str(uuid.uuid4())
+                self.created_at = datetime.now()
 
     def __str__(self):
         ''' String representation of class name, id, and __dict__ '''
