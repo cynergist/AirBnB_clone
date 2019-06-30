@@ -4,7 +4,7 @@
 import json
 import uuid
 from datetime import datetime
-
+import models
 
 class BaseModel():
     ''' Parent class/file for future classes in separate files '''
@@ -23,6 +23,7 @@ class BaseModel():
         ''' created_at is datetime, assigns when instance created
             updated_at is datetime as above and updates on object change
         '''
+        models.storage.new(self)
 
         for key, value in kwargs.items():
             if value is not None:
@@ -39,8 +40,16 @@ class BaseModel():
     def save(self):
         ''' Instance that updates updated_at with current datetime '''
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         ''' Returns dictionary representation of keys/values '''
-        self.__dict__['_class_'] = 'self.__dict__'
-        return self.__dict__
+        dict_serial = {}
+        for key, value in self.__dict__.items():
+            if key == "created_at" or key == "updated_at":
+                dict_serial[key] = datetime.isoformat(value)
+            else:
+                dict_serial[key] = value
+
+        dict_serial['__class__'] = self.__class__.__name__
+        return dict_serial
