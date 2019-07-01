@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
             return False
         classes = line.split()
         try:
-            usrinput = (eval(classes[0]))()
+            usrinput = eval(classes[0])()
 #            create = BaseModel()
 #            create.name = classes[1]
             usrinput.save()
@@ -41,7 +41,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         classes = line.split()
-
+        try:
+            usrinput = eval(classes[0])()
+            usrinput.save()
+            print(usrinput.id)
+        except NameError:
+            print("** class doesn't exist **")
 
     def do_quit(self, line):
         "Quit command to exit the program"
