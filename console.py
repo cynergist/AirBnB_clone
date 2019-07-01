@@ -6,7 +6,10 @@ import models
 import os
 import json
 import uuid
+
+from models import storage
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,10 +22,26 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         "Creates new instance of BaseModel. Saves to JSON when specified"
-        create = BaseModel()
-        create.name = line
-        create.save()
-#        return
+        if line is None or line == "":
+            print("** class name missing **")
+            return False
+        classes = line.split()
+        try:
+            usrinput = (eval(classes[0]))()
+#            create = BaseModel()
+#            create.name = classes[1]
+            usrinput.save()
+            print(usrinput.id)
+        except NameError:
+            print("** class doesn't exist **")
+
+    def do_show(self, line):
+        "Prints the string representation of an instance based on class name and id"
+        if line is None or line == "":
+            print("** class name missing **")
+            return False
+        classes = line.split()
+
 
     def do_quit(self, line):
         "Quit command to exit the program"
