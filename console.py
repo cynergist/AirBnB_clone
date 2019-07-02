@@ -38,14 +38,18 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         "Prints the string instance based on class name and id"
         linearg = shlex.split(line)
-#        if line is None or line == "":
-#            print("** no instance found **")
-#            print("** class doesn't exist **")
-#            return False
-        if len(linearg[0]) == 0:
+        if line is None or line == "":
+            print("** class doesn't exist **")
+            return False
+        if len(linearg) == 0:
             print("** class name missing **")
-        if len(linearg[0]) < 2:
+            return
+        if linearg[0] not in self.clist:
+            print("** class doesn't exist **")
+            return
+        if len(linearg) < 2:
             print("** instance id missing **")
+            return
         all_objects = storage.all()
         checkem = "{}.{}".format(linearg[0], linearg[1])
         ''' if class name or id is not in the retrieved dict keys '''
@@ -57,14 +61,15 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, line):
         "Deletes an instance based on class name and id"
         linearg = shlex.split(line)
-#        if line is None or line == "":
-#            print("** no instance found **")
-#            print("** class doesn't exist **")
-#            return False
+        if line is None or line == "":
+            print("** class doesn't exist **")
+            return False
         if linearg[0] == "":
             print("** class name missing **")
+            return
         if len(linearg) < 2:
             print("** instance id missing **")
+            return
         all_objects = storage.all()
         deleteem = "{}.{}".format(linearg[0], linearg[1])
         if deleteem not in all_objects.keys():
@@ -78,18 +83,32 @@ class HBNBCommand(cmd.Cmd):
         list_all = []
         if line is None or line == "":
             print("** class doesn't exist **")
+            return
         if len(linearg) == 0:
             for value in linearg:
-                clist.append(linearg[i])
+                list_all.append(str(linearg)[value])
+                return
         all_objects = storage.all()
-#        getem = "{}.{}".format(linearg[0], linearg[1])
-#        if getem not in all_objects.keys():
-#            return
+        getem = "{}.{}".format(linearg[0], linearg[1])
+        if getem not in all_objects.keys():
+            return
         if list_all != []:
             print(list_all)
 
 #    def do_update(self, line):
 #        "Updates instance from class name and id by adding/updating attribute"
+#        if len(linearg) == 0:
+#            print("** js **")
+#            return
+#        if len(linearg) == 1:
+#            print("** js **")
+#            return
+#        if len(linearg) == 2:
+#            print("** js **")
+#            return
+#        if len(linearg) == 3:
+#            print("** js **")
+#            return
 
     def do_quit(self, line):
         "Quit command to exit the program"
