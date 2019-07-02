@@ -18,15 +18,16 @@ class HBNBCommand(cmd.Cmd):
         Holberton AirBnB recreation
     '''
 
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
     intro = "AirBnB clone command processor for Holberton School"
+    clist = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
     def do_create(self, line):
         "Creates new instance of BaseModel. Saves to JSON when specified"
         if line is None or line == "":
             print("** class name missing **")
             return False
-        classes = line.split()
+        classes = shlex.split(line)
         try:
             usrinput = eval(classes[0])()
             usrinput.save()
@@ -37,16 +38,58 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         "Prints the string instance based on class name and id"
         linearg = shlex.split(line)
-        if line is None or line == "":
+#        if line is None or line == "":
+#            print("** no instance found **")
+#            print("** class doesn't exist **")
+#            return False
+        if len(linearg[0]) == 0:
             print("** class name missing **")
-            return False
+        if len(linearg[0]) < 2:
+            print("** instance id missing **")
         all_objects = storage.all()
         checkem = "{}.{}".format(linearg[0], linearg[1])
         ''' if class name or id is not in the retrieved dict keys '''
         if checkem not in all_objects.keys():
-            print("No instance found")
+            print("** no instance found **")
             return
         print(all_objects[checkem])
+
+    def do_destroy(self, line):
+        "Deletes an instance based on class name and id"
+        linearg = shlex.split(line)
+#        if line is None or line == "":
+#            print("** no instance found **")
+#            print("** class doesn't exist **")
+#            return False
+        if linearg[0] == "":
+            print("** class name missing **")
+        if len(linearg) < 2:
+            print("** instance id missing **")
+        all_objects = storage.all()
+        deleteem = "{}.{}".format(linearg[0], linearg[1])
+        if deleteem not in all_objects.keys():
+            print("** no instance found **")
+            return
+        del (all_objects[deleteem])
+
+    def do_all(self, line):
+        "Prints all string instances based or not, on class name"
+        linearg = shlex.split(line)
+        list_all = []
+        if line is None or line == "":
+            print("** class doesn't exist **")
+        if len(linearg) == 0:
+            for value in linearg:
+                clist.append(linearg[i])
+        all_objects = storage.all()
+#        getem = "{}.{}".format(linearg[0], linearg[1])
+#        if getem not in all_objects.keys():
+#            return
+        if list_all != []:
+            print(list_all)
+
+#    def do_update(self, line):
+#        "Updates instance from class name and id by adding/updating attribute"
 
     def do_quit(self, line):
         "Quit command to exit the program"
