@@ -27,9 +27,9 @@ class HBNBCommand(cmd.Cmd):
         if line is None or line == "":
             print("** class name missing **")
             return False
-        classes = shlex.split(line)
+        linearg = shlex.split(line)
         try:
-            usrinput = eval(classes[0])()
+            usrinput = eval(linearg[0])()
             usrinput.save()
             print(usrinput.id)
         except NameError:
@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
         linearg = shlex.split(line)
         if line is None or line == "":
             print("** class doesn't exist **")
-            return False
+            return
         if len(linearg) == 0:
             print("** class name missing **")
             return
@@ -85,30 +85,36 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         if len(linearg) == 0:
-            for value in linearg:
-                list_all.append(str(linearg)[value])
+            for value in storage.all():
+                list_all.append(str(storage.all()[value]))
                 return
-        all_objects = storage.all()
-        getem = "{}.{}".format(linearg[0], linearg[1])
-        if getem not in all_objects.keys():
-            return
+        else:
+            if linearg[0] not in self.clist:
+                print("** class doesn't exist **")
+            else:
+                for value in storage.all():
+                    if value.startswith(linearg[0]):
+                        list_all.append(str(storage.all()[value]))
         if list_all != []:
             print(list_all)
 
-#    def do_update(self, line):
-#        "Updates instance from class name and id by adding/updating attribute"
-#        if len(linearg) == 0:
-#            print("** js **")
-#            return
-#        if len(linearg) == 1:
-#            print("** js **")
-#            return
-#        if len(linearg) == 2:
-#            print("** js **")
-#            return
-#        if len(linearg) == 3:
-#            print("** js **")
-#            return
+    def do_update(self, line):
+        "Updates instance from class name and id by adding/updating attribute"
+        if line is None or line == "":
+            print("** class doesn't exist **")
+            return
+        if len(linearg) == 0:
+            print("** class name missing **")
+            return
+        if len(linearg) == 1:
+            print("** instance id missing **")
+            return
+        if len(linearg) == 2:
+            print("** attribute name missing **")
+            return
+        if len(linearg) == 3:
+            print("** value missing **")
+            return
 
     def do_quit(self, line):
         "Quit command to exit the program"
