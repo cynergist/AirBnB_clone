@@ -35,13 +35,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        "Prints the string representation of an instance based on class name and id"
+        "Prints the string instance based on class name and id"
+        linearg = shlex.split(line)
         if line is None or line == "":
             print("** class name missing **")
             return False
-        linearg = shlex.split(line)
         all_objects = storage.all()
-        checkem = "{}, {}".format(linearg[0], linearg[1])
+        checkem = "{}.{}".format(linearg[0], linearg[1])
         ''' if class name or id is not in the retrieved dict keys '''
         if checkem not in all_objects.keys():
             print("No instance found")
