@@ -6,6 +6,7 @@ import models
 import os
 import json
 import uuid
+import shlex
 
 from models import storage
 from models.base_model import BaseModel
@@ -28,8 +29,6 @@ class HBNBCommand(cmd.Cmd):
         classes = line.split()
         try:
             usrinput = eval(classes[0])()
-#            create = BaseModel()
-#            create.name = classes[1]
             usrinput.save()
             print(usrinput.id)
         except NameError:
@@ -40,13 +39,14 @@ class HBNBCommand(cmd.Cmd):
         if line is None or line == "":
             print("** class name missing **")
             return False
-        classes = line.split()
-        try:
-            usrinput = eval(classes[0])()
-            usrinput.save()
-            print(usrinput.id)
-        except NameError:
-            print("** class doesn't exist **")
+        linearg = shlex.split(line)
+        all_objects = storage.all()
+        checkem = "{}, {}".format(linearg[0], linearg[1])
+        ''' if class name or id is not in the retrieved dict keys '''
+        if checkem not in all_objects.keys():
+            print("No instance found")
+            return
+        print(all_objects[checkem])
 
     def do_quit(self, line):
         "Quit command to exit the program"
