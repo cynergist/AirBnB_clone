@@ -52,15 +52,19 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         all_objects = storage.all()
+        ''' checkem is saving the class name and id as strings '''
         checkem = "{}.{}".format(linearg[0], linearg[1])
-        ''' if class name or id is not in the retrieved dict keys '''
+        ''' if class name nor id are in dict keys print no instance found'''
         if checkem not in all_objects.keys():
             print("** no instance found **")
             return
+            ''' print dictionary for the valid class and id using __str__'''
         print(all_objects[checkem])
 
     def do_destroy(self, line):
+        ''' Deletes instance based on class name and id '''
         "Deletes an instance based on class name and id"
+
         linearg = shlex.split(line)
         if line is None or line == "":
             print("** class doesn't exist **")
@@ -71,7 +75,9 @@ class HBNBCommand(cmd.Cmd):
         if len(linearg) < 2:
             print("** instance id missing **")
             return
+        ''' set retrieved dict and set to all_objects '''
         all_objects = storage.all()
+        ''' convert class name and id to strings '''
         deleteem = "{}.{}".format(linearg[0], linearg[1])
         if deleteem not in all_objects.keys():
             print("** no instance found **")
@@ -79,51 +85,56 @@ class HBNBCommand(cmd.Cmd):
         del (all_objects[deleteem])
 
     def do_all(self, line):
+        ''' Print all string instances '''
         "Prints all string instances based or not, on class name"
         linearg = shlex.split(line)
         list_all = []
-        if line is None or line == "":
+        if line is None or line == "" or linearg[0] is None or linearg[0] == "":
             print("** class doesn't exist **")
             return
         if len(linearg) == 0:
             for value in storage.all():
+                ''' retrieve elements from dict as string append to list_all'''
                 list_all.append(str(storage.all()[value]))
                 return
         else:
+            ''' check for class name in our clst '''
             if linearg[0] not in self.clst:
                 print("** class doesn't exist **")
             else:
+                ''' search elements in dict '''
                 for value in storage.all():
-                    if value.startswith(linearg[0]):
+                    ''' find cls, if match, retr as str, appendto list_all '''
+                if value.startswith(linearg[0]):
                         list_all.append(str(storage.all()[value]))
         if list_all != []:
             print(list_all)
 
-    def do_update(self, line):
-        "Updates instance from class name and id by adding/updating attribute"
-        linearg = shlex.split(line)
-        if line is None or line == "":
-            print("** class doesn't exist **")
-            return
-        if len(linearg) == 0:
-            print("** class name missing **")
-            return
-        if len(linearg) == 1:
-            print("** instance id missing **")
-            return
-        else:
-            all_objects = storage.all()
-            updateem = "{}.{}".format(linearg[0], linearg[1])
-            ''' if class name or id is not in the retrieved dict keys '''
-            if updateem not in all_objects.keys():
-                print("** no instance found **")
-                return
-        if len(linearg) == 2:
-            print("** attribute name missing **")
-            return
-        if len(linearg) == 3:
-            print("** value missing **")
-            return
+    #def do_update(self, line):
+       # "Updates instance from class name and id by adding/updating attribute"
+        #linearg = shlex.split(line)
+        #if line is None or line == "" or linearg[0] is None or linearg[0] == "":
+         #   print("** class doesn't exist **")
+          #  return
+        #if len(linearg) == 0:
+         #   print("** class name missing **")
+          #  return
+        #if len(linearg) == 1:
+         #   print("** instance id missing **")
+          #  return
+        #else:
+         #   all_objects = storage.all()
+          #  updateem = "{}.{}".format(linearg[0], linearg[1])
+           # ''' if class name or id is not in the retrieved dict keys '''
+            #if updateem not in all_objects.keys():
+             #   print("** no instance found **")
+              #  return
+        #if len(linearg) == 2:
+         #   print("** attribute name missing **")
+          #  return
+        #if len(linearg) == 3:
+         #   print("** value missing **")
+          #  return
 #        else:
 #            setattr(, linearg[0], linearg[1])
 #            storage.all()[updateem].save()
