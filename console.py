@@ -20,7 +20,8 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
     intro = "AirBnB clone command processor for Holberton School"
-    clist = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+    clst = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+    # clst is short for class list
 
     def do_create(self, line):
         "Creates new instance of BaseModel. Saves to JSON when specified"
@@ -44,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         if len(linearg) == 0:
             print("** class name missing **")
             return
-        if linearg[0] not in self.clist:
+        if linearg[0] not in self.clst:
             print("** class doesn't exist **")
             return
         if len(linearg) < 2:
@@ -89,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
                 list_all.append(str(storage.all()[value]))
                 return
         else:
-            if linearg[0] not in self.clist:
+            if linearg[0] not in self.clst:
                 print("** class doesn't exist **")
             else:
                 for value in storage.all():
@@ -123,9 +124,9 @@ class HBNBCommand(cmd.Cmd):
         if len(linearg) == 3:
             print("** value missing **")
             return
-        else:
-            setattr(, linearg[0], linearg[1])
-            storage.all()[updateem].save()
+#        else:
+#            setattr(, linearg[0], linearg[1])
+#            storage.all()[updateem].save()
 
     def do_quit(self, line):
         "Quit command to exit the program"
