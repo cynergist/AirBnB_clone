@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
         if list_all != []:
             print(list_all)
 
-    #def do_update(self, line):
+#    def do_update(self, line):
        # "Updates instance from class name and id by adding/updating attribute"
         #linearg = shlex.split(line)
         #if line is None or line == "" or linearg[0] is None or linearg[0] == "":
