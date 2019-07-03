@@ -110,35 +110,36 @@ class HBNBCommand(cmd.Cmd):
         if list_all != []:
             print(list_all)
 
-#    def do_update(self, line):
-       # "Updates instance from class name and id by adding/updating attribute"
-        #linearg = shlex.split(line)
-        #if line is None or line == "" or linearg[0] is None or linearg[0] == "":
-         #   print("** class doesn't exist **")
-          #  return
-        #if len(linearg) == 0:
-         #   print("** class name missing **")
-          #  return
-        #if len(linearg) == 1:
-         #   print("** instance id missing **")
-          #  return
-        #else:
-         #   all_objects = storage.all()
-          #  updateem = "{}.{}".format(linearg[0], linearg[1])
-           # ''' if class name or id is not in the retrieved dict keys '''
-            #if updateem not in all_objects.keys():
-             #   print("** no instance found **")
-              #  return
-        #if len(linearg) == 2:
-         #   print("** attribute name missing **")
-          #  return
-        #if len(linearg) == 3:
-         #   print("** value missing **")
-          #  return
-#        else:
-# PROBLEMS SETTING AND SAVING ATTRIBUTE
-#            setattr(, linearg[0], linearg[1])
-#            storage.all()[updateem].save()
+    def do_update(self, line):
+        "Updates instance from class name and id by adding/updating attribute"
+        linearg = shlex.split(line)
+        if line is None or line == "" or linearg[0] is None or linearg[0] == "":
+            print("** class doesn't exist **")
+            return
+        if len(linearg) == 0:
+            print("** class name missing **")
+            return
+        if len(linearg) == 1:
+            print("** instance id missing **")
+            return
+        else:
+            all_objects = storage.all()
+            updateem = "{}.{}".format(linearg[0], linearg[1])
+            ''' if class name or id is not in the retrieved dict keys '''
+            if updateem not in all_objects.keys():
+                print("** no instance found **")
+                return
+        if len(linearg) == 2:
+            print("** attribute name missing **")
+            return
+        if len(linearg) == 3:
+            print("** value missing **")
+            return
+        else:
+#  PROBLEMS SETTING AND SAVING ATTRIBUTE
+#            getem = getattr(self, linearg[2])
+            setattr(updateem, linearg[2], linearg[3])
+            storage.all()[updateem]
 
     def do_quit(self, line):
         "Quit command to exit the program"

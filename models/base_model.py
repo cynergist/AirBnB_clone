@@ -15,31 +15,35 @@ class BaseModel():
         Arg1: None
         Arg2: Current key/values in dictionary
         '''
-        self.id = str(uuid.uuid4())
+        if not kwargs or len(kwargs) == 0:
+            models.storage.new(self)
+
+        if kwargs and len(kwargs) > 0:
+            for key, value in kwargs.items():
+                if value is not None:
+                    pass
+            else:
+                setattr(self, key, value)
+        if "id" not in kwargs:
+            self.id = str(uuid.uuid4())
         ''' id is an attribute of the class
             uuid4 function generates random unique user id
         '''
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+        if "created_at" not in kwargs:
+            self.created_at = datetime.now()
+        if "updated_at" not in kwargs:
+            self.updated_at = self.created_at
         ''' created_at is datetime, assigns when instance created
             updated_at is datetime as above and updates on object change
         '''
-        models.storage.new(self)
-
-        for key, value in kwargs.items():
-            if value is not None:
-                continue
-            else:
-                self.id = str(uuid.uuid4())
-                self.created_at = datetime.now()
 
     def __str__(self):
         ''' String representation of class name, id, and __dict__ '''
         return ('[{}] ({}) {}'
                 .format(self.__class__.__name__, self.id, self.__dict__))
 
-    def save(self):
-        ''' Instance that updates updated_at with current datetime '''
+        def save(self):
+            ''' Instance that updates updated_at with current datetime '''
         self.updated_at = datetime.now()
         models.storage.save()
 
