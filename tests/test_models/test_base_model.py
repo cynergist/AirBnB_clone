@@ -7,10 +7,12 @@ import models
 from models.base_model import BaseModel
 ''' Unittest for base_model '''
 
+
 class SimplisticTest(unittest.TestCase):
     ''' Unittest for ensure testing environment works '''
     def test(self):
         self.assertTrue(True)
+
 
 class TestBaseModel(unittest.TestCase):
     ''' Unittest for base_model '''
@@ -49,6 +51,16 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(self.a.id)
         self.assertTrue(self.b.id)
         self.assertNotEqual(self.b.id, self.a.id)
+
+    def test_to_dict(self):
+        ''' Unittest for return of dictionary representation of key/values '''
+        self.assertTrue(type(self.a.to_dict() is dict))
+        self.assertTrue(type(self.b.to_dict() is dict))
+
+    def test_dict_serial(self):
+        ''' Unittest for serialization of dictionary to json format '''
+
+        '''hasattr() will check for class even if instance is not from class'''
 
 if __name__ == '__main__':
     unittest.main()
