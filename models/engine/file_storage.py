@@ -21,7 +21,7 @@ class FileStorage():
 
     def new(self, obj):
         ''' Public instance that sets in __objects the obj with key '''
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        self.__objects["{}.{}".format(type(obj).__class__.__name__, obj.id)] = obj
 
     def save(self):
         ''' Public instance that serializes __objects to __file_path '''

@@ -122,13 +122,13 @@ class HBNBCommand(cmd.Cmd):
         if len(linearg) == 1:
             print("** instance id missing **")
             return
-        else:
-            all_objects = storage.all()
-            updateem = "{}.{}".format(linearg[0], linearg[1])
-            ''' if class name or id is not in the retrieved dict keys '''
-            if updateem not in all_objects.keys():
-                print("** no instance found **")
-                return
+#        else:
+#            all_objects = storage.all()
+#            updateem = "{}.{}".format(linearg[0], linearg[1])
+#            ''' if class name or id is not in the retrieved dict keys '''
+#            if updateem not in all_objects.keys():
+#                print("** no instance found **")
+#                return
         if len(linearg) == 2:
             print("** attribute name missing **")
             return
@@ -138,6 +138,8 @@ class HBNBCommand(cmd.Cmd):
         else:
 #  PROBLEMS SETTING AND SAVING ATTRIBUTE
 #            getem = getattr(self, linearg[2])
+            all_objects = storage.all()
+            updateem = "{}.{}".format(linearg[0], linearg[1])
             setattr(updateem, linearg[2], linearg[3])
             storage.all()[updateem]
 
