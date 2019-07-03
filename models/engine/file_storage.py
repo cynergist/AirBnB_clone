@@ -12,6 +12,8 @@ class FileStorage():
     '''
     __file_path = 'file.json'
     __objects = {}
+    clst = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+    # clst is short for class list
 
     def all(self):
         ''' Public instance that returns dictionary __objects '''
@@ -34,5 +36,6 @@ class FileStorage():
         if path.isfile('file.json'):
             with open('file.json', 'r') as deserialized_file:
                 dfile = json.load(deserialized_file)
-                for value in dfile:
-                    self.new(BaseModel('**value'))
+                for key, value in dfile.items():
+                    if value['__class__'] in self.clst:
+                            new_obj = eval(value['__class__'])('**value')
