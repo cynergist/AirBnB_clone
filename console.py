@@ -52,14 +52,14 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
         all_objects = storage.all()
-        ''' checkem is saving the class name and id as strings '''
-        checkem = "{}.{}".format(linearg[0], linearg[1])
+        ''' showem is saving the class name and id as strings '''
+        showem = "{}.{}".format(linearg[0], linearg[1])
         ''' if class name nor id are in dict keys print no instance found'''
-        if checkem not in all_objects.keys():
+        if showem not in all_objects.keys():
             print("** no instance found **")
             return
             ''' print dictionary for the valid class and id using __str__'''
-        print(all_objects[checkem])
+        print(all_objects[showem])
 
     def do_destroy(self, line):
         ''' Deletes instance based on class name and id '''
@@ -78,11 +78,11 @@ class HBNBCommand(cmd.Cmd):
         ''' set retrieved dict and set to all_objects '''
         all_objects = storage.all()
         ''' convert class name and id to strings '''
-        deleteem = "{}.{}".format(linearg[0], linearg[1])
-        if deleteem not in all_objects.keys():
+        destroyem = "{}.{}".format(linearg[0], linearg[1])
+        if destroyem not in all_objects.keys():
             print("** no instance found **")
             return
-        del (all_objects[deleteem])
+        del (all_objects[destroyem])
 
     def do_all(self, line):
         ''' Print all string instances '''
@@ -136,6 +136,7 @@ class HBNBCommand(cmd.Cmd):
          #   print("** value missing **")
           #  return
 #        else:
+# PROBLEMS SETTING AND SAVING ATTRIBUTE
 #            setattr(, linearg[0], linearg[1])
 #            storage.all()[updateem].save()
 
