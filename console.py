@@ -7,12 +7,12 @@ import os
 import json
 import uuid
 
-#from models.User import User
-#from models.state import State
-#from models.city import City
-#from models.amenity import Amenity
-#from models.place import Place
-#from models.review import Review
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
@@ -57,9 +57,11 @@ class HBNBCommand(cmd.Cmd):
             return
 #        all_objects = storage.all()
         else:
-            for value in storage.all().values():
+            if showem in storage.all().keys():
                 ''' find cls, if match, retr as str, appendto list_all '''
-                print(value)
+                print(storage.all()[showem])
+            else:
+                print("** no instance found **")
 
     def do_destroy(self, line):
         ''' Deletes instance based on class name and id '''
@@ -76,16 +78,13 @@ class HBNBCommand(cmd.Cmd):
         if len(linearg) < 2:
             print("** instance id missing **")
             return
-        else:
-            for value in storage.all().values():
-                del (value)
-#        ''' set retrieved dict and set to all_objects '''
-#        all_objects = storage.all()
-#        ''' convert class name and id to strings '''
-#        if destroyem not in all_objects.keys():
-#            print("** no instance found **")
-#            return
-#        del (all_objects[destroyem])
+        ''' set retrieved dict and set to all_objects '''
+        all_objects = storage.all()
+        ''' convert class name and id to strings '''
+        if destroyem not in all_objects.keys():
+            print("** no instance found **")
+            return
+        del (all_objects[destroyem])
 
     def do_all(self, line):
         ''' Print all string instances '''
@@ -104,7 +103,8 @@ class HBNBCommand(cmd.Cmd):
                 ''' search elements in dict '''
                 for value in storage.all().values():
                     ''' find cls, if match, retr as str, appendto list_all '''
-                    list_all.append(str(value))
+                    if linearg[0] == value.__class__.__name__:
+                        list_all.append(str(value))
         if list_all != []:
             print(list_all)
 
@@ -113,22 +113,23 @@ class HBNBCommand(cmd.Cmd):
         linearg = line.split()
         if len(linearg) > 1:
             updateem = "{}.{}".format(linearg[0], linearg[1])
-        if line is None or line == "" or linearg[0] is None or linearg[0] == "":
-            print("** class doesn't exist **")
-            return
-        if len(linearg) == 0:
+        if line is None or line == "" or linearg[0] is None or\
+           linearg[0] == "":
             print("** class name missing **")
+            return
+        if linearg[0] not in self.clst:
+            print("** class doesn't exist **")
             return
         if len(linearg) == 1:
             print("** instance id missing **")
             return
-#        else:
-#            all_objects = storage.all()
-#            updateem = "{}.{}".format(linearg[0], linearg[1])
-#            ''' if class name or id is not in the retrieved dict keys '''
-#            if updateem not in all_objects.keys():
-#                print("** no instance found **")
-#                return
+        else:
+            all_objects = storage.all()
+            updateem = "{}.{}".format(linearg[0], linearg[1])
+            ''' if class name or id is not in the retrieved dict keys '''
+            if updateem not in all_objects.keys():
+                print("** no instance found **")
+                return
         if len(linearg) == 2:
             print("** attribute name missing **")
             return
@@ -136,11 +137,9 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
         else:
-#  PROBLEMS SETTING AND SAVING ATTRIBUTE
-#            getem = getattr(self, linearg[2])
-#            all_objects = storage.all()
-            setattr(updateem, linearg[2], linearg[3])
-            storage.all()[updateem].save()
+            all_objects = storage.all()
+            setattr(storage.all()[updateem], linearg[2], linearg[3][1:-1])
+            storage.save()
 
     def do_quit(self, line):
         "Quit command to exit the program"

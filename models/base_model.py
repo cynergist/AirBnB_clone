@@ -24,14 +24,14 @@ class BaseModel():
                     pass
                 else:
                     setattr(self, key, value)
-        if "id" not in kwargs:
+        if not hasattr(self, 'id'):
             self.id = str(uuid.uuid4())
         ''' id is an attribute of the class
             uuid4 function generates random unique user id
         '''
-        if "created_at" not in kwargs:
+        if not hasattr(self, 'created_at'):
             self.created_at = datetime.now()
-        if "updated_at" not in kwargs:
+        if not hasattr(self, 'updated_at'):
             self.updated_at = self.created_at
         ''' created_at is datetime, assigns when instance created
             updated_at is datetime as above and updates on object change

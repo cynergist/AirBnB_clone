@@ -4,6 +4,12 @@
 import json
 from os import path
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage():
@@ -21,7 +27,8 @@ class FileStorage():
 
     def new(self, obj):
         ''' Public instance that sets in __objects the obj with key '''
-        self.__objects["{}.{}".format(type(obj).__class__.__name__, obj.id)] = obj
+        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)]\
+            = obj
 
     def save(self):
         ''' Public instance that serializes __objects to __file_path '''
@@ -29,7 +36,7 @@ class FileStorage():
         for key, value in self.__objects.items():
             dict_a[key] = value.to_dict()
         with open('file.json', 'w') as serialized_file:
-            json.dump(dict_a, serialized_file)
+            serialized_file.write(json.dumps(dict_a))
 
     def reload(self):
         ''' Public instance that deserializes __file_path to __objects '''
@@ -38,4 +45,5 @@ class FileStorage():
                 dfile = json.load(deserialized_file)
                 for key, value in dfile.items():
                     if value['__class__'] in self.clst:
-                            new_obj = eval(value['__class__'])('**value')
+                        new_obj = eval(value['__class__'])(**value)
+                        self.__objects[key] = new_obj
