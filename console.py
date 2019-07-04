@@ -24,15 +24,15 @@ class HBNBCommand(cmd.Cmd):
     '''
 
     prompt = '(hbnb) '
-    intro = "AirBnB clone command processor for Holberton School"
+#    intro = "AirBnB clone command processor for Holberton School"
     clst = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
     # clst is short for class list
 
     def do_create(self, line):
-        "Creates new instance of BaseModel. Saves to JSON when specified"
+        ''' Creates new instance of BaseModel. Saves to JSON when specified '''
         if line is None or line == "":
             print("** class name missing **")
-            return False
+            return
         linearg = line.split()
         try:
             usrinput = eval(linearg[0])()
@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        "Prints the string instance based on class name and id"
+        ''' Prints the string instance based on class name and id '''
         linearg = line.split()
         if len(linearg) > 1:
             showem = "{}.{}".format(linearg[0], linearg[1])
@@ -65,7 +65,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         ''' Deletes instance based on class name and id '''
-        "Deletes an instance based on class name and id"
         linearg = line.split()
         if len(linearg) > 1:
             destroyem = "{}.{}".format(linearg[0], linearg[1])
@@ -88,7 +87,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         ''' Print all string instances '''
-        "Prints all string instances based or not, on class name"
         linearg = line.split()
         list_all = []
         if len(linearg) == 0:
@@ -109,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
             print(list_all)
 
     def do_update(self, line):
-        "Updates instance from class name and id by adding/updating attribute"
+        ''' Updates class name and id by adding/updating attribute '''
         linearg = line.split()
         if len(linearg) > 1:
             updateem = "{}.{}".format(linearg[0], linearg[1])
@@ -142,11 +140,11 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_quit(self, line):
-        "Quit command to exit the program"
+        ''' Quit command to exit the program '''
         return True
 
     def do_EOF(self, line):
-        "EOF command to exit the program"
+        ''' EOF command to exit the program '''
         return True
 
 if __name__ == '__main__':
