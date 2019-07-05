@@ -191,17 +191,27 @@ seventy-eight
 ### File Descriptions
 File Name | Description
 --- | --- |
-`main` | prints "$" and takes input
-`getpath` | gets PATH and removes colons
-`splitit` | tokenizes input then executes in child
-`ifexecutable` | adds spaces to user input, sees if file exists and has execute permissions
-`justdoit` | handles execution of additional arguments
-`words` | tokenizes string with space as delimiters
-`folders` | counts number of filepaths after deliminating
-`_strncmp` | compares number of characters of two strings
-`_strlen` | counts number of characters in a string
-`_strdup` | duplicates string for read or writing
-`_strcat` | mallocs for PATH, increments through separated filepaths
+`AUTHORS` | list of authors contributing to project
+`console.py` | python script that creates instances of classes and allows
+modification
+`<file.json>` | JSON file that contains information on instantiated classes
+`__init__.py` | empty initialization file that makes the current directory a python package
+`README.md` | documentation for the program
+`amenity.py` | class inheriting from base_model.py with amenity based
+attributes
+`base_model.py` | base class all others inhereit from, and saves in
+conjunction with file_storage.py
+`city.py` | class inheriting from base_model.py with city name based
+attributes
+`place.py` | class inheriting from base_model.py with specific attributes,
+like GPS coordinates
+`review.py` | class inheriting from base_model.py with attributes for
+leaving reviews
+`state.py` | class inheriting from base_model.py with attributes for state
+names
+`user.py` | class inheriting from base_model.py with attributes for users
+wanting to "make an account"
+`file_storage.py` | 
 ---
 ## About
 ### This project was created by:
