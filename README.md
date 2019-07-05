@@ -2,17 +2,128 @@
 ---
 ### Custom recreation of [`Airbnb's`](https://www.airbnb.com/) front and back end
 
-<!---######--->`AirBnB_clone` is a multi-phase project created for a Holberton School project.
+<!---######---> `AirBnB_clone` is a multi-phase project created for a Holberton School project.
 
-<!---######--->`Phase 1` consists of creating a console, or command interpreter, to manage AirBnB objects. Can create new objects, retrieve objects, update attributes, destroy objects.
+<!---######---> `Phase 1` consists of creating a console, or command interpreter, to manage AirBnB objects. Can create new objects, retrieve objects, update attributes, destroy objects.
+
+The folder/file structure of the repository is as follows:
 ```
-ls | ./hsh
+.
+├── AUTHORS
+├── console.py
+├── __init__.py
+├── models
+│   ├── amenity.py
+│   ├── base_model.py
+│   ├── city.py
+│   ├── engine
+│   │   ├── file_storage.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── file_storage.cpython-34.pyc
+│   │       └── __init__.cpython-34.pyc
+│   ├── __init__.py
+│   ├── place.py
+│   ├── __pycache__
+│   │   ├── amenity.cpython-34.pyc
+│   │   ├── base_model.cpython-34.pyc
+│   │   ├── city.cpython-34.pyc
+│   │   ├── __init__.cpython-34.pyc
+│   │   ├── place.cpython-34.pyc
+│   │   ├── review.cpython-34.pyc
+│   │   ├── state.cpython-34.pyc
+│   │   └── user.cpython-34.pyc
+│   ├── review.py
+│   ├── state.py
+│   └── user.py
+├── README.md
+└── tests
+    ├── __init__.py
+        └── test_models
+	        ├── __init__.py
+		        ├── __pycache__
+			        │   ├── __init__.cpython-34.pyc
+				        │   ├── test_amenity.cpython-34.pyc
+					        │   ├──
+						test_base_model.cpython-34.pyc
+						        │   ├──
+							test_city.cpython-34.pyc
+							        │   ├──
+								test_place.cpython-34.pyc
+								        │  
+									├──
+									test_review.cpython-34.pyc
+									        │  
+										├──
+										test_state.cpython-34.pyc
+										        │  
+											└──
+											test_user.cpython-34.pyc
+											        ├──
+												test_amenity.py
+												        ├──
+													test_base_model.py
+													        ├──
+														test_city.py
+														        ├──
+															test_engine
+															        │  
+																└──
+																__init__.py
+																        ├──
+																	test_place.py
+																	        ├──
+																		test_review.py
+																		        ├──
+																			test_state.py
+																			        └──
+																				test_user.py
+
+																				8
+																				directories,
+																				42
+																				files
 ```
-Or they can enter interactive mode then input commands following the '$':
+
+---
+### Usage
+All files were created and compiled on Ubuntu 14.04.4 LTS.
+
+
+Upon cloning or forking the directory, the user will be met with the
+following files in the base project folder:
 ```
-./hsh
-$
+vagrant@user:~/AirBnB_clone$ ls
+AUTHORS  console.py  __init__.py  models  README.md  tests
+vagrant@user:~/AirBnB_clone$
 ```
+To run the console, the user should type as follows:
+```
+vagrant@user:~/AirBnB_clone$ ./console.py
+(hbnb)
+```
+Upon seeing the `(hbnb)` prompt, the user will know that the console is
+running and can begin to enter commands. Enter help will display a list of
+commands that can be used with the console:
+```
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+
+```
+Users can recieve descriptions of commands by entering help
+`<command name>` into the console, for example:
+```
+(hbnb) help create
+ Creates new instance of BaseModel. Saves to JSON when specified
+(hbnb) help quit
+ Quit command to exit the program
+(hbnb) help update
+ Updates class name and id by adding/updating attribute
+```
+
 ---
 ### Prototypes
 ##### `int main(int ac, char **av, char **envp)`
@@ -26,25 +137,6 @@ $
 ##### `int _strlen(char *string)`
 ##### `int ifexecutable(char *line)`
 ##### `void justdoit(char *line)`
----
-### Usage
-All files were created and compiled on Ubuntu 14.04.4 LTS using GCC 4.8.4 with
-the following input:
-
-`gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`.
-Includes:
-- `main.c`
-- `getpath.c`
-- `splitit.c`
-- `ifexecutable.c`
-- `justdoit.c`
-- `words.c`
-- `folders.c`
-- `_strncmp.c`
-- `_strlen.c`
-- `_strdup.c`
-- `_strcat.c`
-- `holberton.h`
 ---
 ### Format Specifiers
 Function name | Description
@@ -61,35 +153,10 @@ Function name | Description
 `_strdup` | duplicates string for read or writing
 `_strcat` | mallocs for PATH, increments through separated filepaths
 ---
-### Example Usage
-- `ls | ./hsh` pipes the ls command into non interactive mode of shell program
-- `./hsh` starts the shell in interactive mode with the "$" prompt
-- `mkdir test` will create a directory call test, while in interactive mode
-```
-vagrant@vagrant-ubuntu-trusty-64:~/simple_shell$ echo "/bin/ls" | ./hsh
-$ #README.md#  _strcat.c			 _strncmp.c  holberton.h     justdoit.c		    splitit.c
-AUTHORS      _strdup.c				 folders.c   hsh	     			        main.c		    words.c
-README.md    _strlen.c				 getpath.c   ifexecutable.c  man_1_simple_shell.man
-$ vagrant@vagrant-ubuntu-trusty-64:~/simple_shell$
-```
-- `./hsh` starts the shell in interactive mode with the "$" prompt
-- `mkdir test` will create a directory call test, while in interactive mode
-```
-vagrant@vagrant-ubuntu-trusty-64:~/simple_shell$ ./hsh
-$ ls
-AUTHORS    _strdup.c   folders.c    hsh		    main.c		    words.c
-README.md  _strlen.c   getpath.c    ifexecutable.c  man_1_simple_shell.man
-_strcat.c  _strncmp.c  holberton.h  justdoit.c	        splitit.c
-$ exit
-vagrant@vagrant-ubuntu-trusty-64:~/simple_shell$
-```
-- `ls -la` will list all directory contents including hidden files in long format while in interactive mode
-- `ctrl+x+c` will exit interactive mode and close the simple_shell
----
-### About
-This project was created by:
+## About
+### This project was created by:
 =======
-* **Nick O'Keefe** - [GitHub](https://github.com/nokeefe) | [LinkedIn](https://www.linkedin.com/in/nbokeefe/) at [Holberton
-School](http://holbertonschool.com).
 * **Cynthia Dominguez** - [GitHub](https://github.com/cynergist) | [LinkedIn](https://www.linkedin.com/in/cynthiamdominguez/) at [Holberton
+School](http://holbertonschool.com).
+* **Nick O'Keefe** - [GitHub](https://github.com/nokeefe) | [LinkedIn](https://www.linkedin.com/in/nbokeefe/) at [Holberton
 School](http://holbertonschool.com).
