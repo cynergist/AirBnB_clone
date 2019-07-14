@@ -1,0 +1,14 @@
+header {
+	background-color: white;
+	border-bottom: 1px solid #CCCCCC;
+	height: 70px;
+	width: 100%;
+}
+img {
+	text-align: center;
+	float: left;
+	padding-left: 20px;
+	}
+.home_logo{
+	padding-top: 5px;
+}
