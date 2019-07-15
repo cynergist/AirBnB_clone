@@ -2,14 +2,16 @@ header {
 	background-color: white;
 	border-bottom: 1px solid #CCCCCC;
 	height: 70px;
-	width: 100%;
 	margin-bottom: 30px;
+	width: 100%;
 }
-img {
-	text-align: center;
+/*For future logo alt-text: alt='Holberton AirBnb clone logo seahorse embedded in the letter A'*/
+#home_logo {
+	background-image: url(../images/logo.png);
+	background-position: left;
+	background-repeat: no-repeat;
 	float: left;
-	padding-left: 20px;
+	height: 100%;
+	margin-left: 20px;
+	width: 100%;
 	}
-.home_logo {
-	padding-top: 5px;
-}
