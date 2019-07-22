@@ -12,5 +12,9 @@ Image credit: Holberton School
 
 [Learn to Code HTML & CSS](https://learn.shayhowe.com/html-css/) </br >
 
-## Example of rendering
-<img src="https://imgur.com/a/lzN8WXs">
+Clone the repository:
+
+`git clone https://github.com/cynergist/AirBnB_clone.git`
+
+## Example of rendering of 8-index.html
+<img src="https://imgur.com/a/lzN8WXs.png">
