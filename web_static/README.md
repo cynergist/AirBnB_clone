@@ -14,4 +14,4 @@ Image credit: Holberton School
 
 ## Example of rendering
 
-![Rendering of Hbnb web static site with three place boxes](https://www.dropbox.com/s/mlftdh8t5lv3z95/Screenshot%202019-07-21%2018.34.08.png?dl=0 "Hbnb web static site example")
+![Rendering of Hbnb web static site with three place boxes](https://imgur.com/a/lzN8WXs "Hbnb web static site example") </br >
