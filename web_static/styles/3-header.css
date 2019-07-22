@@ -6,7 +6,7 @@ header {
 	width: 100%;
 }
 /*For future logo alt-text: alt='Holberton AirBnb clone logo seahorse embedded in the letter A'*/
-#home_logo {
+.home_logo {
 	background-image: url(../images/logo.png);
 	background-position: left;
 	background-repeat: no-repeat;
