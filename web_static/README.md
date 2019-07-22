@@ -13,5 +13,4 @@ Image credit: Holberton School
 [Learn to Code HTML & CSS](https://learn.shayhowe.com/html-css/) </br >
 
 ## Example of rendering
-
-![Rendering of Hbnb web static site with three place boxes](https://imgur.com/a/lzN8WXs "Hbnb web static site example") </br >
+<img src="https://imgur.com/a/lzN8WXs">
