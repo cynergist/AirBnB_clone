@@ -17,4 +17,4 @@ Clone the repository:
 `git clone https://github.com/cynergist/AirBnB_clone.git`
 
 ## Example of rendering of 8-index.html
-<img src="https://imgur.com/a/lzN8WXs.png">
+<img src="https://i.imgur.com/6xxuHaP.png">
